@@ -25,3 +25,12 @@ client.test("Demo CompletableFutureSupplyAsyncAcceptException endpoint", functio
     client.log("Demo CompletableFutureSupplyAsyncAcceptException endpoint");
 });
 %}
+
+###
+POST http://localhost:8080/async/QueryCodeAllThenAnyOfPrice?companyName=testCorp&sleepTime=1
+
+> {%
+client.test("Demo CompletableFutureSupplyAsyncAcceptException endpoint", function (){
+    client.log("Demo CompletableFutureSupplyAsyncAcceptException endpoint");
+});
+%}

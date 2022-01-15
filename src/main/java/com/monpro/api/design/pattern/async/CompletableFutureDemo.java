@@ -84,6 +84,23 @@ public class CompletableFutureDemo {
     return priceFuture.get();
   }
 
+  @PostMapping("/QueryCodeAllThenAnyOfPrice")
+  public String queryCodeAllThenAnyOfPrice(
+      @RequestParam("sleepTime") Integer sleepTime) throws ExecutionException, InterruptedException {
+    final CompletableFuture<String> testCodeFuture = CompletableFuture.supplyAsync(() -> queryCode("testCorp", sleepTime));
+    final CompletableFuture<String> appleCodeFuture = CompletableFuture.supplyAsync(() -> queryCode("apple", sleepTime));
+
+    CompletableFuture.allOf(testCodeFuture, appleCodeFuture);
+
+    final CompletableFuture<String> testPriceFuture = testCodeFuture.thenApplyAsync((code) -> queryPrice(code, sleepTime));
+    final CompletableFuture<String> applePriceFuture = appleCodeFuture.thenApplyAsync((code) -> queryPrice(code, sleepTime));
+    final var objectCompletableFuture = CompletableFuture.anyOf(testPriceFuture, applePriceFuture);
+    objectCompletableFuture.thenAccept((result) -> logger.info("result: {}", result));
+
+    logger.info("running other logic while waiting I/O");
+    return objectCompletableFuture.get().toString();
+  }
+
 
   static String queryCode(final String companyName, final Integer sleepTime) {
     try {
