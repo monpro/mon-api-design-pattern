@@ -1,0 +1,27 @@
+
+###
+POST http://localhost:8080/async/CompletableFutureDemoAsync?param=error&sleepTime=1000
+
+> {%
+client.test("Demo CompletableFutureDemoAsync endpoint", function (){
+    client.log("Demo CompletableFutureSupplyAsyncAcceptException endpoint");
+});
+%}
+
+###
+POST http://localhost:8080/async/CompletableFutureSupplyAsyncAcceptException?param=okay&sleepTime=1000
+
+> {%
+client.test("Demo CompletableFutureSupplyAsyncAcceptException endpoint", function (){
+    client.log("Demo CompletableFutureSupplyAsyncAcceptException endpoint");
+});
+%}
+
+###
+POST http://localhost:8080/async/QueryCodeThenPrice?companyName=testCorp&sleepTime=10
+
+> {%
+client.test("Demo CompletableFutureSupplyAsyncAcceptException endpoint", function (){
+    client.log("Demo CompletableFutureSupplyAsyncAcceptException endpoint");
+});
+%}
